@@ -1,0 +1,302 @@
+---
+title: "Employee Satisfaction Survey"
+author: "Nick Minhas"
+date: "2025-02-03"
+output: html_document
+---
+
+  
+
+```{r,echo = FALSE}
+Typical_Employee_Survey_Data.hw <- read.csv("/Users/nickcastillo/Downloads/Typical_Employee_Survey_Data\ hw.csv",header = FALSE)
+
+# Columns
+colnames(Typical_Employee_Survey_Data.hw) <- c("Age","Gender","Satisfaction","Characteristics","Years", "Promotion","Decisions", "Participation", "Proud", "TurnDown", "Relations")
+
+#Factors
+Typical_Employee_Survey_Data.hw$Gender <- factor(Typical_Employee_Survey_Data.hw$Gender,levels = c(1,2), labels= c("Male", "Female"))
+Typical_Employee_Survey_Data.hw$Satisfaction <- factor(Typical_Employee_Survey_Data.hw$Satisfaction,levels = c(1, 2, 3, 4), labels= c("VerySatisfied","ModSatisfied","LittleDissatisfied","VeryDissatisfied"))
+Typical_Employee_Survey_Data.hw$Characteristics <- factor(Typical_Employee_Survey_Data.hw$Characteristics,levels = c(1, 2, 3, 4, 5), labels= c("HighIncome","NoDanger","Flexibility","Advancement","Enjoyment"))
+Typical_Employee_Survey_Data.hw$Promotion <- factor(Typical_Employee_Survey_Data.hw$Promotion,levels = c(1, 2, 3, 4, 5), labels= c("VeryLikely","Likely","NotSure","Unlikely","VeryUnlikely"))
+Typical_Employee_Survey_Data.hw$Decisions <- factor(Typical_Employee_Survey_Data.hw$Decisions,levels = c(1, 2, 3, 4), labels= c("Always","Much ofTime","Sometimes","Never"))
+Typical_Employee_Survey_Data.hw$Participation <- factor(Typical_Employee_Survey_Data.hw$Participation,levels = c(1,2), labels= c("Ys", "No"))
+ Typical_Employee_Survey_Data.hw$Proud <- factor(Typical_Employee_Survey_Data.hw$Proud,levels = c(1, 2, 3, 4), labels= c("VeryProud","SomewhatProud","Indifferent","NotProud"))
+Typical_Employee_Survey_Data.hw$TurnDown <- factor(Typical_Employee_Survey_Data.hw$TurnDown,levels = c(1, 2, 3, 4, 5), labels= c("VeryLikely","Likely","NotSure","Unlikely","VeryUnlikely"))
+Typical_Employee_Survey_Data.hw$Relations <- factor(Typical_Employee_Survey_Data.hw$Relations,levels = c(1, 2, 3, 4,5), labels= c("VeryGood","Good","SoSo","Bad","VeryBad"))
+
+
+
+
+
+
+
+
+
+```
+
+```{r}
+
+# 1. What is your age as of last birthday?
+```
+
+```{r,echo = FALSE}
+hist(Typical_Employee_Survey_Data.hw$Age,main="Distribution of Age", xlab="Age", col="blue", breaks=5)
+```
+```{r}
+#The histogram above shows that a majority of people working at the company are between the ages 30 to 40. 
+	
+```
+
+
+
+
+
+
+```{r}
+
+# 2.	What is your gender?
+```
+
+```{r,echo = FALSE}
+barplot(table(Typical_Employee_Survey_Data.hw$Gender), main= "Gender Distribution", xlab="Gender", col= "white", ylab= "Frequency")
+```
+
+```{r}
+#The bar chart above shows that there are more male workers at the company compared to female workers. There is 20 more male workers than females.
+```
+
+```{r}
+
+# 3.On the whole, how satisfied arc you with your job?
+```
+
+```{r,echo = FALSE}
+barplot(table(Typical_Employee_Survey_Data.hw$Satisfaction), main= "Satisfaction At Work ", xlab="Saticfaction Levels", col= "green", ylab= "Frequency", cex.axis = 0.8)
+```
+
+```{r}
+#The bar chart above shows that a majority of workers at the company are very satisfied with their jobs. At least 20 people are a little or moderately dissatisfied with their job, but its very minimal compared to how many people are satisfied at work.
+```
+
+
+```{r}
+
+# 4.	Which one of the following job characteristics is most important to you?
+```
+
+```{r,echo = FALSE}
+barplot(table(Typical_Employee_Survey_Data.hw$Characteristics), main= "Job Characteristic ", xlab="Characteristic Levels", col= "yellow", ylab= "Frequency", cex.axis = 0.8)
+```
+
+```{r}
+#The bar chart above shows that the most important characteristic at work is enjoying the work they do. The least important characteristic is flexible hours. 
+
+```
+
+
+```{r}
+
+# #5.	How many years altogether have you worked for your present employer?
+```
+
+```{r,echo = FALSE}
+stem(Typical_Employee_Survey_Data.hw$Years)
+
+```
+
+```{r}
+# The stem graph above shows that most employees at the company are new employees withing the 0-4 year range. There are only a small handful of employees who are 30 years plus.
+```
+
+
+```{r}
+ # 6.In the next five years, how likely are you to he promoted'?
+```
+
+```{r,echo = FALSE}
+
+barplot(table(Typical_Employee_Survey_Data.hw$Promotion), main= "Chance of Promotion ", xlab=" Chances", col= "orange", ylab= "Frequency", cex.axis = 0.8)
+```
+
+```{r}
+# The bar graph above shows that many people are not so optimistic of getting promoted in the near future. 
+```
+
+
+```{r}
+ # 7.	Does your job allow you to take part in making decisions that affect your work?
+```
+
+```{r,echo = FALSE}
+
+barplot(table(Typical_Employee_Survey_Data.hw$Promotion), main= "Chance of Promotion ", xlab=" Chances", col= "lightblue", ylab= "Frequency", cex.axis = 0.8)
+```
+
+```{r}
+# The bar graph above shows that many people are not so optimistic of getting promoted in the near future. 
+```
+
+```{r}
+ # 8.	As part of your job, do you participate in budgetary decisions?
+```
+
+```{r,echo = FALSE}
+
+barplot(table(Typical_Employee_Survey_Data.hw$Participation), main= "Particpation in Budgets ", xlab=" Particpate", col= "lightgreen", ylab= "Frequency", cex.axis = 0.8)
+```
+
+```{r}
+# According to the bar chart above we see more than half the people from the firm will participate in budget decisions.
+```
+```{r}
+ # 9.	How proud are you to be working for this organization?
+```
+
+```{r,echo = FALSE}
+scatter.smooth(Typical_Employee_Survey_Data.hw$Proud,Typical_Employee_Survey_Data.hw$TurnDown,span =0.5, main = "Pride vs Turn Down", xlab= "Turn down", ylab= "Pride", col="pink")
+```
+
+```{r}
+# The scatter plot above shows that the proud a employee is the less likey they will turn down an offer from opposing company.
+```
+
+```{r}
+ # 10.	Would you turn down another job for more pay in order to stay with this organization?
+```
+
+```{r,echo = FALSE}
+
+summary(Typical_Employee_Survey_Data.hw$TurnDown)
+
+
+```
+
+```{r}
+#The summary chart shows us that a most  people are unlikely to leave their current job for a new one. There is still a fair amount of people that are likely to leave their current job.
+```
+
+
+
+```{r}
+ # 11.	In general, how would you describe relations in your workplace between coworkers and colleagues?
+```
+
+```{r,echo = FALSE}
+summary(Typical_Employee_Survey_Data.hw$Relations)
+```
+
+```{r}
+#The summary above showcases how a majority of workers have a good relationship with their coworkers. Their is not so much bad relationships with coworkers.
+```
+
+
+
+```{r}
+#5 point summary(1) and Box Plot (2) Age
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Age)
+boxplot(Typical_Employee_Survey_Data.hw$Age)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Gender
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Gender)
+boxplot(Typical_Employee_Survey_Data.hw$Gender)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Satisfaction
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Satisfaction)
+boxplot(Typical_Employee_Survey_Data.hw$Satisfaction)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Characteristics
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Characteristics)
+boxplot(Typical_Employee_Survey_Data.hw$Characteristics)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Years
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Years)
+boxplot(Typical_Employee_Survey_Data.hw$Years)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Promotion
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Promotion)
+boxplot(Typical_Employee_Survey_Data.hw$Promotion)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Decisions
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Decisions)
+boxplot(Typical_Employee_Survey_Data.hw$Decisions)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Participation
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Participation)
+boxplot(Typical_Employee_Survey_Data.hw$Participation)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Proud
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Proud)
+boxplot(Typical_Employee_Survey_Data.hw$Proud)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Turn Down
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$TurnDown)
+boxplot(Typical_Employee_Survey_Data.hw$TurnDown)
+
+```
+
+```{r}
+#5 point summary(1) and Box Plot (2) Relations
+```
+
+```{r,echo = FALSE}
+fivenum(Typical_Employee_Survey_Data.hw$Relations)
+boxplot(Typical_Employee_Survey_Data.hw$Relations)
+
+```
